@@ -15553,6 +15553,76 @@ OBJECT Codeunit 70005 ForNAV Detect Localization
   }
 }
 
+OBJECT Codeunit 70006 ForNAV Read Watermarks
+{
+  OBJECT-PROPERTIES
+  {
+    Date=12-09-17;
+    Time=11:59:17;
+    Modified=Yes;
+    Version List=FORNAV;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE ReadFromFile@1(VAR ForNAVSetup@1004 : Record 70000;Which@1003 : Integer) : Boolean;
+    VAR
+      TempBlob@1002 : TEMPORARY Record 99008535;
+      FileMgt@1001 : Codeunit 419;
+      FileName@1000 : Text;
+    BEGIN
+      FileName := FileMgt.BLOBImport(TempBlob,'');
+
+      WITH ForNAVSetup DO
+        IF FileName <> '' THEN BEGIN
+          CASE Which OF
+            FIELDNO(Logo):
+              BEGIN
+                Logo := TempBlob.Blob;
+                "Logo File Name" := GetFileNameFromFile(FileName);
+              END;
+            FIELDNO("Document Watermark"):
+              BEGIN
+               "Document Watermark" := TempBlob.Blob;
+                "Document Watermark File Name" := GetFileNameFromFile(FileName);
+              END;
+            FIELDNO("List Report Watermark"):
+              BEGIN
+                "List Report Watermark" := TempBlob.Blob;
+                "List Report Watermark File N." := GetFileNameFromFile(FileName);
+              END;
+          END;
+          EXIT(TRUE);
+        END;
+
+      EXIT(FALSE);
+    END;
+
+    LOCAL PROCEDURE GetFileNameFromFile@3(Value@1000 : Text) : Text;
+    VAR
+      LastPos@1001 : Integer;
+      i@1002 : Integer;
+    BEGIN
+      WHILE i < STRLEN(Value) DO BEGIN
+        i := i + 1;
+        IF Value[i] = '\' THEN
+          LastPos := i;
+      END;
+
+      EXIT(COPYSTR(Value, LastPos + 1));
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
 OBJECT Codeunit 70009 ForNAV First Time Setup
 {
   OBJECT-PROPERTIES
