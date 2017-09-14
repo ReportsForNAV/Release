@@ -2,8 +2,8 @@ OBJECT Table 70000 ForNAV Setup
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=13:48:10;
+    Date=14-09-17;
+    Time=12:43:36;
     Modified=Yes;
     Version List=FORNAVCTP5;
   }
@@ -71,9 +71,16 @@ OBJECT Table 70000 ForNAV Setup
       CODEUNIT.RUN(CODEUNIT::"ForNAV Test Runner");
     END;
 
-    PROCEDURE DesignTemplate@1000000003();
+    PROCEDURE DesignTemplatePortrait@1000000003();
     VAR
       Template@1000 : Report 70527;
+    BEGIN
+      Template.RUNMODAL;
+    END;
+
+    PROCEDURE DesignTemplateLandscape@9();
+    VAR
+      Template@1000 : Report 70526;
     BEGIN
       Template.RUNMODAL;
     END;
@@ -12799,8 +12806,8 @@ OBJECT Report 70518 ForNAV Tax Purchase Templ.
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:08;
+    Date=14-09-17;
+    Time=12:46:21;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -12823,7 +12830,8 @@ OBJECT Report 70518 ForNAV Tax Purchase Templ.
 
     OnPostReport=BEGIN
                    ;ReportForNav.Post;
-                   ERROR('');
+                   IF NOT CurrReport.PREVIEW THEN
+                     ERROR('');
                  END;
 
   }
@@ -12832,6 +12840,7 @@ OBJECT Report 70518 ForNAV Tax Purchase Templ.
     { 2   ;    ;DataItem;Header              ;
                DataItemTable=Table122;
                DataItemTableView=SORTING(No.);
+               MaxIteration=1;
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
                                   ChangeLanguage("Language Code");
@@ -13204,8 +13213,8 @@ OBJECT Report 70519 ForNAV Sales Templ. Sales Tax
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:08;
+    Date=14-09-17;
+    Time=12:46:39;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -13228,7 +13237,8 @@ OBJECT Report 70519 ForNAV Sales Templ. Sales Tax
 
     OnPostReport=BEGIN
                    ;ReportForNav.Post;
-                   ERROR('');
+                   IF NOT CurrReport.PREVIEW THEN
+                     ERROR('');
                  END;
 
   }
@@ -13237,6 +13247,7 @@ OBJECT Report 70519 ForNAV Sales Templ. Sales Tax
     { 2   ;    ;DataItem;Header              ;
                DataItemTable=Table112;
                DataItemTableView=SORTING(No.);
+               MaxIteration=1;
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
                                   ChangeLanguage("Language Code");
@@ -14212,8 +14223,8 @@ OBJECT Report 70528 ForNAV Purchase Template
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:08;
+    Date=14-09-17;
+    Time=12:45:39;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -14236,7 +14247,6 @@ OBJECT Report 70528 ForNAV Purchase Template
 
     OnPostReport=BEGIN
                    ;ReportForNav.Post;
-                   ERROR('');
                  END;
 
   }
@@ -14245,6 +14255,12 @@ OBJECT Report 70528 ForNAV Purchase Template
     { 2   ;    ;DataItem;Header              ;
                DataItemTable=Table122;
                DataItemTableView=SORTING(No.);
+               MaxIteration=1;
+               OnPreDataItem=BEGIN
+                               IF NOT CurrReport.PREVIEW THEN
+                                 ERROR('');
+                             END;
+
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
                                   ChangeLanguage("Language Code");
@@ -14666,8 +14682,8 @@ OBJECT Report 70529 ForNAV Sales Template
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:08;
+    Date=14-09-17;
+    Time=12:48:33;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -14678,7 +14694,7 @@ OBJECT Report 70529 ForNAV Sales Template
                    ;ReportForNav:= ReportForNav.Report(CurrReport.OBJECTID,CurrReport.LANGUAGE,SERIALNUMBER,USERID,COMPANYNAME);ReportForNav.Init;
                    CODEUNIT.RUN(CODEUNIT::"ForNAV First Time Setup");
                    COMMIT;
-                   ReportForNavOpenDesigner := TRUE;
+                   ReportForNavOpenDesigner := ReportForNavAllowDesign;
                  END;
 
     OnPreReport=VAR
@@ -14690,7 +14706,8 @@ OBJECT Report 70529 ForNAV Sales Template
 
     OnPostReport=BEGIN
                    ;ReportForNav.Post;
-                   ERROR('');
+                   IF NOT CurrReport.PREVIEW THEN
+                     ERROR('');
                  END;
 
   }
@@ -14699,6 +14716,7 @@ OBJECT Report 70529 ForNAV Sales Template
     { 2   ;    ;DataItem;Header              ;
                DataItemTable=Table112;
                DataItemTableView=SORTING(No.);
+               MaxIteration=1;
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
                                   ChangeLanguage("Language Code");
@@ -17416,8 +17434,8 @@ OBJECT Page 70000 ForNAV Setup
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=13:37:02;
+    Date=14-09-17;
+    Time=12:44:13;
     Modified=Yes;
     Version List=FORNAVCTP5;
   }
@@ -17538,14 +17556,25 @@ OBJECT Page 70000 ForNAV Setup
       { 13      ;1   ;ActionGroup;
                       Name=Template }
       { 1000000014;2 ;Action    ;
-                      Name=DesignTemplate;
-                      CaptionML=ENU=Design General Template;
+                      Name=DesignTemplatePortrait;
+                      CaptionML=ENU=Design General Template (Portrait);
                       Promoted=Yes;
                       PromotedIsBig=Yes;
                       Image=UnitOfMeasure;
                       PromotedCategory=Process;
                       OnAction=BEGIN
-                                 DesignTemplate;
+                                 DesignTemplatePortrait;
+                               END;
+                                }
+      { 21      ;2   ;Action    ;
+                      Name=DesignTemplateLandscape;
+                      CaptionML=ENU=Design General Template (Landscape);
+                      Promoted=Yes;
+                      PromotedIsBig=Yes;
+                      Image=VATPostingSetup;
+                      PromotedCategory=Process;
+                      OnAction=BEGIN
+                                 DesignTemplateLandscape;
                                END;
                                 }
       { 4       ;2   ;Action    ;
