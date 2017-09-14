@@ -547,8 +547,8 @@ OBJECT Report 70000 ForNAV VAT Order Confirmation
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:04;
+    Date=14-09-17;
+    Time=12:29:55;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -602,14 +602,11 @@ OBJECT Report 70000 ForNAV VAT Order Confirmation
                                  WHERE(Document Type=CONST(Order));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -751,9 +748,7 @@ OBJECT Report 70000 ForNAV VAT Order Confirmation
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -1028,8 +1023,8 @@ OBJECT Report 70001 ForNAV VAT Sales Invoice
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:04;
+    Date=14-09-17;
+    Time=12:14:25;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -1085,11 +1080,8 @@ OBJECT Report 70001 ForNAV VAT Sales Invoice
                                   //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -1252,9 +1244,7 @@ OBJECT Report 70001 ForNAV VAT Sales Invoice
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -1529,8 +1519,8 @@ OBJECT Report 70002 ForNAV VAT Credit Memo
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:05;
+    Date=14-09-17;
+    Time=12:30:09;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -1583,14 +1573,11 @@ OBJECT Report 70002 ForNAV VAT Credit Memo
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -1731,9 +1718,7 @@ OBJECT Report 70002 ForNAV VAT Credit Memo
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -2008,8 +1993,8 @@ OBJECT Report 70003 ForNAV Sales Shipment
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:37:32;
+    Date=14-09-17;
+    Time=12:30:28;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -2062,12 +2047,9 @@ OBJECT Report 70003 ForNAV Sales Shipment
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date }
 
@@ -2182,9 +2164,7 @@ OBJECT Report 70003 ForNAV Sales Shipment
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -2431,8 +2411,8 @@ OBJECT Report 70004 ForNAV VAT Sales Quote
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:05;
+    Date=14-09-17;
+    Time=12:30:44;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -2463,14 +2443,11 @@ OBJECT Report 70004 ForNAV VAT Sales Quote
                                  WHERE(Document Type=CONST(Quote));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -2635,9 +2612,7 @@ OBJECT Report 70004 ForNAV VAT Sales Quote
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -2912,8 +2887,8 @@ OBJECT Report 70050 ForNAV Tax Order Confirmation
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:05;
+    Date=14-09-17;
+    Time=12:31:04;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -2967,13 +2942,10 @@ OBJECT Report 70050 ForNAV Tax Order Confirmation
                                  WHERE(Document Type=CONST(Order));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -3079,9 +3051,7 @@ OBJECT Report 70050 ForNAV Tax Order Confirmation
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -3343,8 +3313,8 @@ OBJECT Report 70051 ForNAV Tax Sales Invoice
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:05;
+    Date=14-09-17;
+    Time=12:31:18;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -3397,13 +3367,10 @@ OBJECT Report 70051 ForNAV Tax Sales Invoice
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -3531,9 +3498,7 @@ OBJECT Report 70051 ForNAV Tax Sales Invoice
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -3795,8 +3760,8 @@ OBJECT Report 70052 ForNAV Tax Credit Memo
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:05;
+    Date=14-09-17;
+    Time=12:31:33;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -3849,13 +3814,10 @@ OBJECT Report 70052 ForNAV Tax Credit Memo
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -3960,9 +3922,7 @@ OBJECT Report 70052 ForNAV Tax Credit Memo
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -4224,8 +4184,8 @@ OBJECT Report 70054 ForNAV Tax Sales Quote
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:05;
+    Date=14-09-17;
+    Time=12:31:48;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -4256,13 +4216,10 @@ OBJECT Report 70054 ForNAV Tax Sales Quote
                                  WHERE(Document Type=CONST(Quote));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -4391,9 +4348,7 @@ OBJECT Report 70054 ForNAV Tax Sales Quote
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -4655,8 +4610,8 @@ OBJECT Report 70100 ForNAV VAT Purchase Order
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:05;
+    Date=14-09-17;
+    Time=12:32:00;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -4710,14 +4665,11 @@ OBJECT Report 70100 ForNAV VAT Purchase Order
                                  WHERE(Document Type=CONST(Order));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -4882,9 +4834,7 @@ OBJECT Report 70100 ForNAV VAT Purchase Order
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -5159,8 +5109,8 @@ OBJECT Report 70101 ForNAV VAT Purchase Invoice
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:06;
+    Date=14-09-17;
+    Time=12:32:14;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -5213,14 +5163,11 @@ OBJECT Report 70101 ForNAV VAT Purchase Invoice
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -5383,9 +5330,7 @@ OBJECT Report 70101 ForNAV VAT Purchase Invoice
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -5660,8 +5605,8 @@ OBJECT Report 70102 ForNAV VAT Purchase Cr. Memo
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:06;
+    Date=14-09-17;
+    Time=12:32:24;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -5714,14 +5659,11 @@ OBJECT Report 70102 ForNAV VAT Purchase Cr. Memo
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -5885,9 +5827,7 @@ OBJECT Report 70102 ForNAV VAT Purchase Cr. Memo
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -6162,8 +6102,8 @@ OBJECT Report 70104 ForNAV VAT Purchase Quote
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:06;
+    Date=14-09-17;
+    Time=12:32:36;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -6217,14 +6157,11 @@ OBJECT Report 70104 ForNAV VAT Purchase Quote
                                  WHERE(Document Type=CONST(Quote));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetVatAmountLines;
                                   GetVATClauses;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -6389,9 +6326,7 @@ OBJECT Report 70104 ForNAV VAT Purchase Quote
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -6666,8 +6601,8 @@ OBJECT Report 70150 ForNAV Tax Purchase Order
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:06;
+    Date=14-09-17;
+    Time=12:32:47;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -6721,13 +6656,10 @@ OBJECT Report 70150 ForNAV Tax Purchase Order
                                  WHERE(Document Type=CONST(Order));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -6857,9 +6789,7 @@ OBJECT Report 70150 ForNAV Tax Purchase Order
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -7121,8 +7051,8 @@ OBJECT Report 70151 ForNAV Tax Purchase Invoice
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:06;
+    Date=14-09-17;
+    Time=12:32:57;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -7175,13 +7105,10 @@ OBJECT Report 70151 ForNAV Tax Purchase Invoice
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -7309,9 +7236,7 @@ OBJECT Report 70151 ForNAV Tax Purchase Invoice
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -7573,8 +7498,8 @@ OBJECT Report 70152 ForNAV Tax Purchase Cr. Memo
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:06;
+    Date=14-09-17;
+    Time=12:33:06;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -7627,13 +7552,10 @@ OBJECT Report 70152 ForNAV Tax Purchase Cr. Memo
                DataItemTableView=SORTING(No.);
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -7762,9 +7684,7 @@ OBJECT Report 70152 ForNAV Tax Purchase Cr. Memo
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -8026,8 +7946,8 @@ OBJECT Report 70154 ForNAV Tax Purchase Quote
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:06;
+    Date=14-09-17;
+    Time=12:33:16;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -8081,13 +8001,10 @@ OBJECT Report 70154 ForNAV Tax Purchase Quote
                                  WHERE(Document Type=CONST(Quote));
                OnAfterGetRecord=BEGIN
                                   ReportForNav.PageNo := 1;
-                                  ChangeLanguage("Language Code");
+                                  //ChangeLanguage("Language Code");
                                   GetSalesTaxDetails;
+                                  UpdateNoPrinted;
                                 END;
-
-               OnPostDataItem=BEGIN
-                                UpdateNoPrinted;
-                              END;
 
                ReqFilterFields=No.,Posting Date;
                CalcFields=Amount Including VAT,Amount }
@@ -8217,9 +8134,7 @@ OBJECT Report 70154 ForNAV Tax Purchase Quote
     VAR
       ForNAVUpdateNoPrinted@1000000000 : Codeunit 70003;
     BEGIN
-      IF NOT CurrReport.PREVIEW THEN
-        EXIT;
-      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header);
+      ForNAVUpdateNoPrinted.UpdateNoPrinted(Header, CurrReport.PREVIEW);
     END;
 
     EVENT ReportForNav@5000::OnInit@5002();
@@ -8481,8 +8396,8 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:07;
+    Date=14-09-17;
+    Time=09:51:46;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -8512,6 +8427,7 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
                ENZ=Customer Top 10 List];
     OnInitReport=BEGIN
                                                                                                                               ;ReportForNav:= ReportForNav.Report(CurrReport.OBJECTID,CurrReport.LANGUAGE,SERIALNUMBER,USERID,COMPANYNAME);ReportForNav.Init;
+                   LoadWatermark;
                  END;
 
     OnPreReport=BEGIN
@@ -8595,6 +8511,21 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
       ReportForNavOpenDesigner@5002 : Boolean;
       ReportForNavAllowDesign@5004 : Boolean INDATASET;
 
+    LOCAL PROCEDURE LoadWatermark@1000000004();
+    VAR
+      ForNAVSetup@1000000002 : Record 70000;
+      OutStream@1000000001 : OutStream;
+    BEGIN
+      WITH ForNAVSetup DO BEGIN
+        GET;
+        CALCFIELDS("List Report Watermark");
+        IF NOT "List Report Watermark".HASVALUE THEN
+          EXIT;
+        "List Report Watermark".CREATEOUTSTREAM(OutStream);
+      END;
+      ReportForNav.Watermark.Image.Load(OutStream);
+    END;
+
     EVENT ReportForNav@5000::OnInit@5002();
     VAR
       ReportLayoutSelection@1000 : Record 9651;
@@ -8681,11 +8612,11 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
       PdfFile.CLOSE;
     END;
 
-    EVENT ReportForNav@5000::OnPreSection@5012(DataItemId@1000 : Text;SectionId@1001 : Text);
+    EVENT ReportForNav@5000::OnPreSection@5012(DataItemId@1000000000 : Text;SectionId@1000000001 : Text);
     BEGIN
     END;
 
-    EVENT ReportForNav@5000::OnPostSection@50013(DataItemId@1000 : Text;SectionId@1001 : Text);
+    EVENT ReportForNav@5000::OnPostSection@50013(DataItemId@1000000000 : Text;SectionId@1000000001 : Text);
     BEGIN
     END;
 
@@ -8725,9 +8656,9 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
       ReportForNav.PrinterSettings.PageSettings := ReportForNavClient.SelectPrinter(ReportForNav.PrinterSettings.PrinterName,ReportForNav.PrinterSettings.ShowPrinterDialog,ReportForNav.PrinterSettings.PageSettings);
     END;
 
-    EVENT ReportForNav@5000::OnPrint@5005(InStream@1000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream");
+    EVENT ReportForNav@5000::OnPrint@5005(InStream@1000000000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream");
     VAR
-      ClientFileName@1001 : Text[255];
+      ClientFileName@1000000001 : Text[255];
     BEGIN
       DOWNLOADFROMSTREAM(InStream, '', '<TEMP>', '', ClientFileName);
       ReportForNavClient.Print(ClientFileName);
@@ -8742,17 +8673,17 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
       END;
     END;
 
-    EVENT ReportForNav@5000::OnView@5008(ClientFileName@1000 : Text;Parameters@1001 : Text;ServerFileName@1002 : Text);
+    EVENT ReportForNav@5000::OnView@5008(ClientFileName@1000000000 : Text;Parameters@1000000001 : Text;ServerFileName@1000000002 : Text);
     VAR
-      ServerFile@1003 : File;
-      ServerInStream@1004 : InStream;
+      ServerFile@1000000003 : File;
+      ServerInStream@1000000004 : InStream;
     BEGIN
       ServerFile.OPEN(ServerFileName);
       ServerFile.CREATEINSTREAM(ServerInStream);
       DOWNLOADFROMSTREAM(ServerInStream,'','','',ClientFileName);
     END;
 
-    EVENT ReportForNav@5000::OnMessage@5009(Operation@1000 : Text;Parameter@1001 : Text;ParameterNo@1002 : Integer);
+    EVENT ReportForNav@5000::OnMessage@5009(Operation@1000000000 : Text;Parameter@1000000001 : Text;ParameterNo@1000000002 : Integer);
     BEGIN
       CASE Operation OF
         'Open'    : ReportForNavDialog.OPEN(Parameter);
@@ -8763,9 +8694,9 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
       END;
     END;
 
-    EVENT ReportForNav@5000::OnPrintPreview@5011(InStream@1000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream";Preview@1001 : Boolean);
+    EVENT ReportForNav@5000::OnPrintPreview@5011(InStream@1000000000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream";Preview@1000000001 : Boolean);
     VAR
-      ClientFileName@1002 : Text[255];
+      ClientFileName@1000000002 : Text[255];
     BEGIN
       CurrReport.LANGUAGE := SYSTEM.GLOBALLANGUAGE;
       DOWNLOADFROMSTREAM(InStream, '', '<TEMP>', '', ClientFileName);
@@ -8776,13 +8707,19 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
     END;
 
     BEGIN
+    {
+      Copyright (c) 2017 ForNAV ApS - All Rights Reserved
+      The intellectual work and technical concepts contained in this file are proprietary to ForNAV.
+      Unauthorized reverse engineering, distribution or copying of this file, parts hereof, or derived work, via any medium is strictly prohibited without written permission from ForNAV ApS.
+      This source code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    }
     END.
   }
   RDLDATA
   {
     <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
-  <Description>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</Description>
+  <Description>hykAAO1a627byBX+X6DvMGWBxsGqMufCW2JtYMvxRqgvgqwk23YLY0SObG4ojpakHGvbAn2aPlifpGdISiYpiqaspECBIEgiDs+cOfOd+wyP3jzMAnQvotiXYU/DXV1DInSl54e3PW2RTP9oa2++/+1vjn5MIj4Scxkl8TlfykVyLSKfB/6vIkKPPz+sGbEu6RqKW2lIQ5d8JnpazulMRpf8XkN9GSaRDMbLObw7FfdvH+aRiONuYdHu+0HhkXTQFrJ7tUxntSrqoZUkHdRfBMkiEjAWigVMCTpouJgEvvsnsRzLT0JRe5bLbWET3ZoywXSQ/9SP5wFfZnIrgY8/AKc4kTPY+VjOEdbRuR8nGiptar1t2tXhDya2paGryc/CTS5lT7N0omMNnfki8D6KCSB477vifRT0tP6rnxgw+GnMJ4GIu8kDsB7yW/FO+Ld3SU8jjqVnIx99L7mDAazkvODRrR/G8KjDXkv/wDoAcE87VmrqIGsOHE/nPpAabCX2+9AHirEIk7v4anp84QeBPxOJiEDqcBiJjOqCxzB07Ub+PFmjMRYzQCgRGtgJQkcnPPTi9Cc8DBIxw7nSV6hV9J3hdcoTrojVbCDggZtiA/s54QEPXYEOzvt/ftm5FAnq3/HwNh+AneQzU7xgC+o/bFfGP/jic0+7vhqNB5c/HFSZvERXo9O3o4NTEbsiVLZf4Hvuh596msLplzM/gO2/E1yRXJyXRlfiXspuR+23szaSoYwToEc/RHIx7/TlAja/PByJW2WgfemJDiwlUMZGQwMPFKPlAFbwLGA6ElMwrloslYAiypDMoM/0lo0XdX/C3U99GcgIYAbzEhq69m9Drtykp5kGc6hBLAdjk2KPU8YpNfDEmRJGqevqwiFkIgxle6lZgG2nJl+xi0559WHkh2BID1eg1KGIlCH3tCkPYrV6xqJO6HTaVfgWYtUym5NEC5iSucWZcgOn6zimpRWwArRyfOLSaBlFVoviWDwkJ/JhBeH7WEQDbz14DeEOFqXY6JjgYOfS5Urys0By8AzwO5yK4zjUWbnftbiVAr0fdJA9TzrIveMAWdLTiwpR/I8D0MFMqCkXvucF4lxMwWPfyejX9FVPywYUbU/7z7/+nYmWWSxwTC1x5XJRlHlud0XU5yEY4uccvgoqgMt1sgwEgC0jP1lm+ICGYXa2iVxR8FwRNX9xWMX5MAW6Dn2ScTfboP/2QbgLBfAYolJVCRCnO0aGtlWnisd3X1kRY+nx5RN6yGha4W7tjTupw51m3O1a3Ie+q7y/AH1fzuY8XA7CqYxmKbI3OdEG1pCIAO4SjrmKLHiBUz2YpmFvgXekPLmEbz6yBvhc3sqUZ1qe/EXK2WDGVdjahDwLQjC2mHfTaa0gd3aGmNZBzDJuWG9j24/GcdPncwVnybLrw4u+xZhjtafeiQw8RRCJVXQPINLvbd9r8RotfEXVCnCMa428IPrzLJ/VqcXI1yQ7qmXIs9SY6gSDLXfB0DEB1agfOjZobQbI7d2uzwB1+jmRESQ7VfTIBIqHJxX2tMcMt7hHQV8pSTtl0fbKWm/lefozyln8sCaNb6aWYlrB9Vn9TMqkXBtBIRiVCuLGAuWxPNKZaXh4ArWRhYklbMfVLc4YNzHzOCPO1HInjmPblaomX24ICheDMNPzZi1jsq5hU8rY7tUMNlY7u57z6FPghwLXQrF+XWfaBQnqo88jXh94sBAXYjYRYABQWmeV9Q0U1pnhrV6t6/9NW0tZjNKCPNuDuWkXigyqeJRt4YRH7YqNBtMhVdPJMyOuT42bppNVqNl4c1m9rXptsrVWVfVq8YJhcuFgojsMc+65rmdahosxt20BgzBALJNNHc+a1pbbK37N9omZ/gzDdNqE3azev0lDVdoxxRB+lzeJPPY81e2bJWvtKElap8dCgIXO/cno2offCotCeF0NXSyCxIfOcK3ILOD+dbNY6g7vZCguJUK/66EXL9AbVEOT7jbPm/F6xnfoBXoFf7+rm7Jm+wqFiwDa+j/8/uH0Nfxz/LqG+u3NBfeD9iLk9I0S5DT5+o3LvwO/V7a9AwjrKY0yrKlaofDheKza7jiJ0mdAr7U4m1NXctULtknfSsLByfFle6FS6kZ8UopWK19/HJyN1WnEDjp6nNMoxCNZJsnfuo+STNNTj4PpIkxDETq458FL9PcI6vYoRPDw+p8vuz9LPzx4gf6BXrysq2W+ed03r/vmdV/V61q1B0SvbQ/27ARal3O0Ws7lXTipL39PpLcsFnPq+RltgEOZ6ekTwqemMTF03fLYRGeGbViCOBPBCBY6I6LaBmSrrQsqk3aN3Ssqsr5QSdJT78o+fxylZ98b5T1hnXS9Jwr7TZ2P5OeqOBsi0ZJIMGOLVPCmiPbH/HZD7xqm5UAHQln+Y1OODB4RbGBTK1C1D8zXV/NLoqoBXBSpWkA682JjfSmLQhNqU50Qm1ADExM7rL7nzhqgrpr7xDlso5/VHMhudktF16iev5aAyhtmUj2IbQKK7AAUzCxCxXRmUcN0CKUZYM1QpbP3AavmFLUZrOqhaQmsvEUk1RaxCSzaEqz1pvMrr6yFfkSOEmxg27EtyrBlEdxsZCUm+wDo7Apg9Ui0BGAelGn1aLQJQLYrgJVTiOdCWGGzB4i05pizGcTqAebq3ba4t83Rjw5ronbrzArDaavbl8FiFuZ7IWXZN+UtHrbStneUm7eThSzrUtcWZAIx1p5AtjUdwzWxO+WYET4RuiEc3Z4yd7LD9eJqvT1zMGUlc60eLW/Lwer0+GvlYGpUc/AWqf5XOZjuklqMJ5y9fMfxRD6m1DAMR3dIo5+X6+s9szPdOeG0yc50l4RjPhPCLZkaU2I5BqXNwbIC4r55m+6cdtrkbbZL2rGeAeMWOL5IRm9guQfQbOfU1Ca/sy0hpxZo+8sB/YUyfyPTfcCuuUH7f6gDqpdyR4flz5KOFJapgrd8qcTWabLmhqhd+XVYWL26XHEjRdmORsKVUfV7tEwicO/0Uzxn+5cOj4sWYzGz85nq8nc1ufC9wWoWQL5e/eiw4QvK7/8L</Description>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -8791,7 +8728,7 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>80044bf1-df65-4ec7-9dc8-0fd3a69dfa53</rd:DataSourceID>
+      <rd:DataSourceID>0bf93008-d486-48d1-979f-f6fbc41a9852</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -8807,7 +8744,7 @@ OBJECT Report 70201 ForNAV Customer Top 10 List
     </ReportSection>
   </ReportSections>
   <rd:ReportUnitType>Invalid</rd:ReportUnitType>
-  <rd:ReportID>fa1751de-f30f-4374-8fed-354e8221ed4f</rd:ReportID>
+  <rd:ReportID>961117e8-be0f-4ef4-9442-3940a576f31a</rd:ReportID>
 </Report>
     END_OF_RDLDATA
   }
@@ -8817,8 +8754,8 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-17;
-    Time=15:31:07;
+    Date=14-09-17;
+    Time=09:52:36;
     Modified=Yes;
     Version List=FORNAV3.0.0.1287/1287;
   }
@@ -8848,6 +8785,7 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
                ENZ=Vendor Top 10 List];
     OnInitReport=BEGIN
                                                                                                                               ;ReportForNav:= ReportForNav.Report(CurrReport.OBJECTID,CurrReport.LANGUAGE,SERIALNUMBER,USERID,COMPANYNAME);ReportForNav.Init;
+                   LoadWatermark;
                  END;
 
     OnPreReport=BEGIN
@@ -8931,6 +8869,21 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
       ReportForNavOpenDesigner@5002 : Boolean;
       ReportForNavAllowDesign@5004 : Boolean INDATASET;
 
+    LOCAL PROCEDURE LoadWatermark@1000000004();
+    VAR
+      ForNAVSetup@1000000002 : Record 70000;
+      OutStream@1000000001 : OutStream;
+    BEGIN
+      WITH ForNAVSetup DO BEGIN
+        GET;
+        CALCFIELDS("List Report Watermark");
+        IF NOT "List Report Watermark".HASVALUE THEN
+          EXIT;
+        "List Report Watermark".CREATEOUTSTREAM(OutStream);
+      END;
+      ReportForNav.Watermark.Image.Load(OutStream);
+    END;
+
     EVENT ReportForNav@5000::OnInit@5002();
     VAR
       ReportLayoutSelection@1000 : Record 9651;
@@ -9017,11 +8970,11 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
       PdfFile.CLOSE;
     END;
 
-    EVENT ReportForNav@5000::OnPreSection@5012(DataItemId@1000 : Text;SectionId@1001 : Text);
+    EVENT ReportForNav@5000::OnPreSection@5012(DataItemId@1000000000 : Text;SectionId@1000000001 : Text);
     BEGIN
     END;
 
-    EVENT ReportForNav@5000::OnPostSection@50013(DataItemId@1000 : Text;SectionId@1001 : Text);
+    EVENT ReportForNav@5000::OnPostSection@50013(DataItemId@1000000000 : Text;SectionId@1000000001 : Text);
     BEGIN
     END;
 
@@ -9061,9 +9014,9 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
       ReportForNav.PrinterSettings.PageSettings := ReportForNavClient.SelectPrinter(ReportForNav.PrinterSettings.PrinterName,ReportForNav.PrinterSettings.ShowPrinterDialog,ReportForNav.PrinterSettings.PageSettings);
     END;
 
-    EVENT ReportForNav@5000::OnPrint@5005(InStream@1000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream");
+    EVENT ReportForNav@5000::OnPrint@5005(InStream@1000000000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream");
     VAR
-      ClientFileName@1001 : Text[255];
+      ClientFileName@1000000001 : Text[255];
     BEGIN
       DOWNLOADFROMSTREAM(InStream, '', '<TEMP>', '', ClientFileName);
       ReportForNavClient.Print(ClientFileName);
@@ -9078,17 +9031,17 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
       END;
     END;
 
-    EVENT ReportForNav@5000::OnView@5008(ClientFileName@1000 : Text;Parameters@1001 : Text;ServerFileName@1002 : Text);
+    EVENT ReportForNav@5000::OnView@5008(ClientFileName@1000000000 : Text;Parameters@1000000001 : Text;ServerFileName@1000000002 : Text);
     VAR
-      ServerFile@1003 : File;
-      ServerInStream@1004 : InStream;
+      ServerFile@1000000003 : File;
+      ServerInStream@1000000004 : InStream;
     BEGIN
       ServerFile.OPEN(ServerFileName);
       ServerFile.CREATEINSTREAM(ServerInStream);
       DOWNLOADFROMSTREAM(ServerInStream,'','','',ClientFileName);
     END;
 
-    EVENT ReportForNav@5000::OnMessage@5009(Operation@1000 : Text;Parameter@1001 : Text;ParameterNo@1002 : Integer);
+    EVENT ReportForNav@5000::OnMessage@5009(Operation@1000000000 : Text;Parameter@1000000001 : Text;ParameterNo@1000000002 : Integer);
     BEGIN
       CASE Operation OF
         'Open'    : ReportForNavDialog.OPEN(Parameter);
@@ -9099,9 +9052,9 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
       END;
     END;
 
-    EVENT ReportForNav@5000::OnPrintPreview@5011(InStream@1000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream";Preview@1001 : Boolean);
+    EVENT ReportForNav@5000::OnPrintPreview@5011(InStream@1000000000 : DotNet "'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.IO.Stream";Preview@1000000001 : Boolean);
     VAR
-      ClientFileName@1002 : Text[255];
+      ClientFileName@1000000002 : Text[255];
     BEGIN
       CurrReport.LANGUAGE := SYSTEM.GLOBALLANGUAGE;
       DOWNLOADFROMSTREAM(InStream, '', '<TEMP>', '', ClientFileName);
@@ -9112,13 +9065,19 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
     END;
 
     BEGIN
+    {
+      Copyright (c) 2017 ForNAV ApS - All Rights Reserved
+      The intellectual work and technical concepts contained in this file are proprietary to ForNAV.
+      Unauthorized reverse engineering, distribution or copying of this file, parts hereof, or derived work, via any medium is strictly prohibited without written permission from ForNAV ApS.
+      This source code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    }
     END.
   }
   RDLDATA
   {
     <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
-  <Description>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</Description>
+  <Description>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</Description>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -9127,7 +9086,7 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>371d4fcf-bfda-474d-be2c-81598b50ecb5</rd:DataSourceID>
+      <rd:DataSourceID>4a4a8aa4-ac21-4564-99a7-f5740f7c4c90</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -9143,7 +9102,7 @@ OBJECT Report 70202 ForNAV Vendor Top 10 List
     </ReportSection>
   </ReportSections>
   <rd:ReportUnitType>Invalid</rd:ReportUnitType>
-  <rd:ReportID>cdce5ce2-1f14-4cad-8cc0-0077e5401eb3</rd:ReportID>
+  <rd:ReportID>c1e0e3bc-b5a2-4ac2-a817-52f9ccd7b981</rd:ReportID>
 </Report>
     END_OF_RDLDATA
   }
@@ -13905,6 +13864,12 @@ OBJECT Report 70526 ForNAV Template - Landscape
     END;
 
     BEGIN
+    {
+      Copyright (c) 2017 ForNAV ApS - All Rights Reserved
+      The intellectual work and technical concepts contained in this file are proprietary to ForNAV.
+      Unauthorized reverse engineering, distribution or copying of this file, parts hereof, or derived work, via any medium is strictly prohibited without written permission from ForNAV ApS.
+      This source code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    }
     END.
   }
   RDLDATA
@@ -14200,6 +14165,12 @@ OBJECT Report 70527 ForNAV Template
     END;
 
     BEGIN
+    {
+      Copyright (c) 2017 ForNAV ApS - All Rights Reserved
+      The intellectual work and technical concepts contained in this file are proprietary to ForNAV.
+      Unauthorized reverse engineering, distribution or copying of this file, parts hereof, or derived work, via any medium is strictly prohibited without written permission from ForNAV ApS.
+      This source code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    }
     END.
   }
   RDLDATA
@@ -15355,8 +15326,9 @@ OBJECT Codeunit 70003 ForNAV Update No. Printed
 {
   OBJECT-PROPERTIES
   {
-    Date=14-07-17;
-    Time=14:46:59;
+    Date=14-09-17;
+    Time=12:08:51;
+    Modified=Yes;
     Version List=FORNAVCTP4;
   }
   PROPERTIES
@@ -15376,12 +15348,15 @@ OBJECT Codeunit 70003 ForNAV Update No. Printed
   CODE
   {
 
-    PROCEDURE UpdateNoPrinted@1000000001(Rec@1000000000 : Variant);
+    PROCEDURE UpdateNoPrinted@1000000001(Rec@1000000000 : Variant;Preview@1000 : Boolean);
     VAR
       RecRefLib@1000000003 : Codeunit 70090;
       TestValidDociFace@1000000002 : Codeunit 70080;
       RecRef@1000000001 : RecordRef;
     BEGIN
+      IF Preview THEN
+        EXIT;
+
       RecRefLib.ConvertToRecRef(Rec, RecRef);
       TestValidDociFace.ThrowErrorIfNotValid(RecRef);
       FindAndUpdateField(RecRef);
@@ -16921,8 +16896,9 @@ OBJECT Codeunit 70999 ForNAV Test
 {
   OBJECT-PROPERTIES
   {
-    Date=14-07-17;
-    Time=14:59:43;
+    Date=14-09-17;
+    Time=12:34:17;
+    Modified=Yes;
     Version List=FORNAVCTP4;
   }
   PROPERTIES
@@ -17017,7 +16993,7 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH SalesHeader DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(SalesHeader);
+          UpdateNoPrinted.UpdateNoPrinted(SalesHeader, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
@@ -17025,7 +17001,7 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH SalesShipmentHeader DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(SalesShipmentHeader);
+          UpdateNoPrinted.UpdateNoPrinted(SalesShipmentHeader, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
@@ -17033,7 +17009,7 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH SalesInvoiceHeader DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(SalesInvoiceHeader);
+          UpdateNoPrinted.UpdateNoPrinted(SalesInvoiceHeader, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
@@ -17041,7 +17017,7 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH SalesCrMemoHeader DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(SalesCrMemoHeader);
+          UpdateNoPrinted.UpdateNoPrinted(SalesCrMemoHeader, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
@@ -17049,7 +17025,7 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH PurchaseHeader DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(PurchaseHeader);
+          UpdateNoPrinted.UpdateNoPrinted(PurchaseHeader, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
@@ -17057,7 +17033,7 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH PurchRcptHeader DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(PurchRcptHeader);
+          UpdateNoPrinted.UpdateNoPrinted(PurchRcptHeader, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
@@ -17065,7 +17041,7 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH PurchInvHeader DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(PurchInvHeader);
+          UpdateNoPrinted.UpdateNoPrinted(PurchInvHeader, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
@@ -17073,13 +17049,13 @@ OBJECT Codeunit 70999 ForNAV Test
       WITH PurchCrMemoHdr DO
         IF FINDSET THEN REPEAT
           xNoPrinted := "No. Printed";
-          UpdateNoPrinted.UpdateNoPrinted(PurchCrMemoHdr);
+          UpdateNoPrinted.UpdateNoPrinted(PurchCrMemoHdr, FALSE);
           FIND;
           TESTFIELD("No. Printed", xNoPrinted + 1);
         UNTIL NEXT = 0;
 
       CompanyInformation.GET;
-      ASSERTERROR UpdateNoPrinted.UpdateNoPrinted(CompanyInformation);
+      ASSERTERROR UpdateNoPrinted.UpdateNoPrinted(CompanyInformation, FALSE);
     END;
 
     BEGIN
@@ -17097,8 +17073,8 @@ OBJECT MenuSuite 1060 ForNAV
 {
   OBJECT-PROPERTIES
   {
-    Date=27-07-17;
-    Time=10:22:23;
+    Date=14-09-17;
+    Time=13:33:54;
     Modified=Yes;
     Version List=FORNAV;
   }
@@ -17368,6 +17344,68 @@ OBJECT MenuSuite 1060 ForNAV
                                                                 MemberOfMenu=[{0691571E-EDD6-473D-A139-81B1E9B887F2}];
                                                                 RunObjectType=Report;
                                                                 RunObjectID=70221;
+                                                                ParentNodeID=[{18FE127A-54F8-4D99-9251-F9F5B7D230B6}];
+                                                                Visible=Yes;
+                                                                NextNodeID=[{41CABE99-FB5D-4D56-853C-5D1F4736CD42}];
+                                                                DepartmentCategory=Reports and Analysis }
+    { MenuItem       ;[{41CABE99-FB5D-4D56-853C-5D1F4736CD42}] ;Name=Debitor - top 10-liste;
+                                                                CaptionML=[CSY=ForNAV NejlepÊ¡ch 10 z kazn¡ku;
+                                                                           DAN=ForNAV Debitor - top 10-liste;
+                                                                           DEU=ForNAV Top 10 Liste (Debitoren);
+                                                                           ENU=ForNAV Customer Top 10 List;
+                                                                           FIN=ForNAV Asiakkaat - 10 p„„asiakasta;
+                                                                           FRA=ForNAV Clients - PalmarŠs;
+                                                                           ISL=ForNAV Vi÷skiptama÷ur - 10 efstu;
+                                                                           ITA=ForNAV Lista primi 10 clienti;
+                                                                           NLD=ForNAV Klanten - Top 10;
+                                                                           NOR=ForNAV Kunde - ti p† topp-liste;
+                                                                           RUS=à‰Š†¡• - ‹†÷ƒ…˜ „†¤˜•ˆ…;
+                                                                           SVE=ForNAV Kunder, 10 i topp;
+                                                                           DES=ForNAV Top 10 Liste (Debitoren);
+                                                                           ENG=ForNAV Customer Top 10 List;
+                                                                           FRB=ForNAV Clients - PalmarŠs;
+                                                                           ITS=ForNAV Lista primi 10 clienti;
+                                                                           NLB=ForNAV Klanten - Top 10;
+                                                                           DEA=ForNAV Top 10 Liste (Debitoren);
+                                                                           ENA=ForNAV Customer Top 10 List;
+                                                                           ESN=ForNAV Los 10 mejores clientes;
+                                                                           FRS=ForNAV Clients - PalmarŠs;
+                                                                           ENZ=ForNAV Customer Top 10 List];
+                                                                ApplicationArea=;
+                                                                MemberOfMenu=[{0691571E-EDD6-473D-A139-81B1E9B887F2}];
+                                                                RunObjectType=Report;
+                                                                RunObjectID=70201;
+                                                                ParentNodeID=[{18FE127A-54F8-4D99-9251-F9F5B7D230B6}];
+                                                                Visible=Yes;
+                                                                NextNodeID=[{45294869-9463-4CF8-B506-43F3CEDF442B}];
+                                                                DepartmentCategory=Reports and Analysis }
+    { MenuItem       ;[{45294869-9463-4CF8-B506-43F3CEDF442B}] ;Name=Kreditor - top 10-liste;
+                                                                CaptionML=[CSY=ForNAV Dodavatel - nejlepÊ¡ch 10;
+                                                                           DAN=ForNAV Kreditor - top 10-liste;
+                                                                           DEU=ForNAV H„ndler Top-10-Liste;
+                                                                           ENU=ForNAV Vendor Top 10 List;
+                                                                           FIN=ForNAV 10 p„„toimittajaa;
+                                                                           FRA=ForNAV PalmarŠs fournisseurs;
+                                                                           ISL=ForNAV 10 efstu l nardrottnar;
+                                                                           ITA=ForNAV Lista primi 10 fornitori;
+                                                                           NLD=ForNAV Lijst top 10 leveranciers;
+                                                                           NOR=ForNAV Leverandûr - topp 10-liste;
+                                                                           RUS=çŒ¤•…ƒ—ŠˆŠ - ‹†÷ƒ…˜ „†¤˜•ˆ…;
+                                                                           SVE=ForNAV 10 i topp leverant”rer;
+                                                                           DES=ForNAV H„ndler Top-10-Liste;
+                                                                           ENG=ForNAV Vendor Top 10 List;
+                                                                           FRB=ForNAV PalmarŠs fournisseurs;
+                                                                           ITS=ForNAV Lista primi 10 fornitori;
+                                                                           NLB=ForNAV Lijst top 10 leveranciers;
+                                                                           DEA=ForNAV H„ndler Top-10-Liste;
+                                                                           ENA=ForNAV Vendor Top 10 List;
+                                                                           ESN=ForNAV Listado 10 mejores proveedores;
+                                                                           FRS=ForNAV PalmarŠs fournisseurs;
+                                                                           ENZ=ForNAV Vendor Top 10 List];
+                                                                ApplicationArea=;
+                                                                MemberOfMenu=[{0691571E-EDD6-473D-A139-81B1E9B887F2}];
+                                                                RunObjectType=Report;
+                                                                RunObjectID=70202;
                                                                 ParentNodeID=[{18FE127A-54F8-4D99-9251-F9F5B7D230B6}];
                                                                 Visible=Yes;
                                                                 NextNodeID=[{00000000-0000-0000-0000-000000000000}];
